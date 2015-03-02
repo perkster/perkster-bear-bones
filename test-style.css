@@ -1,0 +1,35 @@
+/*
+Theme Name:  Bear Bones 1.0.7
+Description:	A bare bones theme based on the work of lots of awesome developers. Please read the README file for more information. It has a ton of elements that you might need but the ability to expand or get rid of them if necessary. Made for scss developers that know how to rock some css!
+Author:	Wendy Shoef
+Author URI:	http://www.perkstersolutions.com/
+Version:	1.0.7
+Notes:  	This theme was developed by Wendy Shoef of http://www.perkstersolutions.com
+		Perkster Solutions works with designers in helping them bring their work online!	
+		
+License: GNU General Public License v2.0 (or later)
+License URI: http://www.opensource.org/licenses/gpl-license.php		
+*/
+/*------------------------------------*\ 
+		TEST - STYLE.CSS
+\*------------------------------------*/
+.footer-links__link { color: #664466; }
+
+.sub-menu__link { color: red; }
+
+.sub-menu .sub-menu .sub-menu__link { color: green; }
+
+/*
+	Accessibility classes:
+	Taken from  http://webaim.org/techniques/css/invisiblecontent/ 
+	
+*/
+.accessibility { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+.skiplink { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+.skiplink:focus { position: static; width: auto; height: auto; }
+
+body {
+	font-family: sans-serif;
+}

@@ -228,7 +228,7 @@ function bb_class_as_string ( $class = null ) {
 
 function bb_excerpt($excerpt_length = 55, $id = false, $echo = true, $excerpt_more = '...') {
          
-    $text = '';
+    $excerpt = '';
    
     if($id) {
 		$post = get_post($id);
@@ -238,30 +238,29 @@ function bb_excerpt($excerpt_length = 55, $id = false, $echo = true, $excerpt_mo
 		//$text = ($post->post_excerpt) ? $post->post_excerpt : get_the_content('');
     }
 	$title = get_the_title($post->ID);  //prar($title);
-	$text = ($post->post_excerpt) ? $post->post_excerpt : $post->post_content;
-	if($title == $text) $text = get_the_content('');
+	$excerpt = ($post->post_excerpt) ? $post->post_excerpt : $post->post_content;
+	if($title == $excerpt) $excerpt = $post->post_content;
          
-	//$text = strip_shortcodes( $text );
-	$text = strip_tags(strip_shortcodes($text)); //Strips tags, images and other shortcodes
-	$text = apply_filters('the_content', $text);
-	$text = str_replace(']]>', ']]&gt;', $text);
+	//$excerpt = strip_shortcodes( $excerpt );
+	$excerpt = strip_tags(strip_shortcodes($excerpt)); //Strips tags, images and other shortcodes
+	//$excerpt = str_replace(']]>', ']]&gt;', $excerpt);
        
     //$excerpt_more = ' ' . '[...]';
 	//$excerpt_more = null;
 	//$excerpt_more = '...';
-	$words = preg_split("/[\n\r\t ]+/", $text, $excerpt_length + 1, PREG_SPLIT_NO_EMPTY);
+	$words = preg_split("/[\n\r\t ]+/", $excerpt, $excerpt_length + 1, PREG_SPLIT_NO_EMPTY);
 	if ( count($words) > $excerpt_length ) {
 		array_pop($words);
-		$text = implode(' ', $words);
-		$text = $text . $excerpt_more;
+		$excerpt = implode(' ', $words);
+		$excerpt = $excerpt . $excerpt_more;
 	} else {
-		$text = implode(' ', $words);
+		$excerpt = implode(' ', $words);
 	}
 	
 	if($echo) {
-		echo apply_filters('the_content', $text);
+		echo apply_filters('the_content', $excerpt);
 	} else {
-		return $text;
+		return $excerpt;
 	}
 }
  

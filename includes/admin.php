@@ -84,4 +84,32 @@ function bear_bones_title(  ) {
 	} 	
 }
 add_filter( 'wp_title', 'bear_bones_title', 10, 2 );
+
+function bear_bones_login_logo_url() {
+    return home_url();
+}
+add_filter( 'login_headerurl', 'bear_bones_login_logo_url' );
+
+function bear_bones_login_logo() {
+	$logo =  get_theme_mod('site_logo');
+	 if( $logo ) {		
+		//prar($logo, false, true);
+		list($width, $height, $type, $attr) = getimagesize( $logo );
+		//prar( $attr, false, true );
+		$widthHeight = $width . 'px ' . $height . 'px';
+	 ?>
+		<style type="text/css">
+			body.login div#login h1 a {
+				background-image: url(<?php echo $logo; ?>);
+				padding-bottom: 30px;
+				-webkit-background-size: <?php echo $widthHeight; ?>;
+				background-size: <?php echo $widthHeight; ?>;
+				width: <?php echo $width; ?>px;
+				height: <?php echo $height; ?>px;
+			}
+		</style>
+	<?php 
+	}
+}
+add_action( 'login_enqueue_scripts', 'bear_bones_login_logo' );
 ?>

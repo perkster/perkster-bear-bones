@@ -25,7 +25,10 @@ $postID = $post->ID;?>
 							echo "<h1>$blogTitle</h1>";
 						}
 					?>
-					<?php get_template_part ( 'tpl', 'content-list' ); ?>
+					<?php 
+						//check for template else default
+						get_template_part ( 'tpl', 'content-list' ); 
+					?>
 					<?php bb_display_widget( get_post_meta( get_option('page_for_posts'), 'widget-bottom', true ) ); ?>
 			</main><!-- end MAIN CONTENT -->
 		  </div>

@@ -10,6 +10,9 @@ if ( !defined('ABSPATH')) exit;
 get_header('custom'); ?>
 <!-- single.php -->
 <?php bear_bones_main_start( array ('tplVariable' => 'single' ) ); ?>
+<?php
+	//if isset, get template else get default
+?>
 				<?php get_template_part ( 'tpl', 'content-single' ); ?>
 <?php bear_bones_main_end(  array ('tplVariable' => 'single' ) ); ?>
 <?php get_footer('custom'); ?>

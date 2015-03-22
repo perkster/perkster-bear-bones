@@ -65,7 +65,7 @@ function bear_bones_scripts() {
 	//Check to see if jquery is included in theme
 	$bb_include_jquery = get_theme_mod( 'bb_include_jquery' );
 	
-	bear_bones_modernizr( $bb_template_dir );
+	bear_bones_modernizr( $bb_template_dir, $stylesheet_dir );
 	
 	//Load jquery-ui-tabs include_jquery_ui_tabs, 
 	if( get_theme_mod( 'include_jquery_ui_tabs' ) ) {
@@ -194,21 +194,28 @@ function bb_local_script($file = null, $ext = 'js', $return = false ) {
  */
  
 function bb_main_style ( $returnFile = false) {
+	//check to see if style override set
 	$main_style = get_theme_mod ( 'main_style' );
+	
+	//if different stylesheet indicated, clean up file name
 	if( $main_style != 'style' ) {
 		if( substr( $main_style, 1 , 1 ) != '/' ) $main_style = '/' . $main_style;
 		if( substr( $main_style, -4, 4 ) != '.css' ) $main_style .= '.css';
 		$main_style =  $main_style;
 	}
 
+	//check to see if override stylesheet exists
 	if( file_exists ( get_stylesheet_directory() . $main_style ) ) {
+	
 		if( $returnFile ) {
 			$main_style = get_stylesheet_directory() . $main_style;
 		} else {
 			$main_style = get_stylesheet_directory_uri() . $main_style;
 		}
-		
+	
+	//if override stylesheet does not exist, set it to default style.css
 	} else {
+	
 		if( $returnFile ) {
 			$main_style = get_stylesheet_directory() . '/style.css';
 		} else {
@@ -217,15 +224,23 @@ function bb_main_style ( $returnFile = false) {
 		
 	}		
 	
-	//check to see if user is admin
-	$current_user = wp_get_current_user();
-	if (user_can( $current_user, 'administrator' )) {
-	// user is an admin
-		//check if override
-		if( get_theme_mod( 'use_admin_style' )) {
+	/******* Admin Style override **********/
+	// NOTE: Does not look in parent directory for admin override
+	
+	//check if override
+	if( get_theme_mod( 'use_admin_style' )) {
+	
+		//check to see if user is admin
+		$current_user = wp_get_current_user();
+		
+		if (user_can( $current_user, 'administrator' )) {
+		// user is an admin		
+		
 			$admin_style = get_theme_mod('admin_style');
-			//check if file exists 
+			//check if file exists and is full location
 			if( file_exists ( $admin_style ) ) $main_style = $admin_style;
+			
+			//check if file exists within theme directory
 			if( file_exists ( get_stylesheet_directory() . '/' . $admin_style ) ) {
 				if( $returnFile ) {
 					$main_style = get_stylesheet_directory() . '/' . $admin_style;
@@ -235,6 +250,7 @@ function bb_main_style ( $returnFile = false) {
 			}
 		}
 	}
+
 	//prar($main_style);
 	return $main_style;
 }
@@ -249,15 +265,23 @@ function bb_custom_background_size () {
 }
 
 
-function bear_bones_modernizr( $bb_template_dir = null ) {
-	//Load modernizr include_modernizr, 
+function bear_bones_modernizr( $bb_template_dir = null, $stylesheet_dir = null ) {
+	//Check to see if modernizr required
 	$modernizr = get_theme_mod( 'include_modernizr' );
+	
 	if( $modernizr ) {
-		$modernizrLocation = $bb_template_dir .'/js/modernizr.custom.82446.js';
+		//set base file
+		$modernizrFile = '/js/modernizr.js';
+		//if in child, use theme else use parent
+		$modernizrLocation = ( file_exists( $stylesheet_dir . $modernizrFile ) ? $stylesheet_dir . $modernizrFile : $bb_template_dir . $modernizrFile );
+		//prar($modernizrLocation);
+		
 		if(	$modernizr == 'cdn' ) {
 			$modernizrCDNUrl = 'https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js';
 			if ( checkCDN( $modernizrCDNUrl ) ) $modernizrLocation = $modernizrCDNUrl;				
 		}
+		
+		//register script
 		wp_register_script( 'modernizr',  $modernizrLocation );
 		wp_enqueue_script ('modernizr', $modernizrLocation, null, null, true );
 		

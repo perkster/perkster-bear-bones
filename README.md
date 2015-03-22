@@ -1,16 +1,18 @@
 
-![Bear Bones](http://perkstersolutions.com/bear-bones/images/logo.png)
+Bear Bones - We'll leave the designing to you
+=============
 
-# Bear Bones - We'll leave the designing to you
 
-*******************************
 Including font files
+-------
 You can include external css files like Google Web fonts or Font Awesome in the Appearance > Customize > Style Options
 
 Custom CSS
+-------
 You can add custom css in the Appearance > Customize > Style Options. However, this theme was made so that all css could be handled in the style.css file.
 
 Including custom js in your theme. 
+-------
 You can write custom code and put in the custom.js file located in the /js/ folder. One file include in the following order:
 	/js/min/custom.min.js
 	/min/custom.min.js
@@ -19,6 +21,7 @@ You can write custom code and put in the custom.js file located in the /js/ fold
 Or you can create your own file and include it in the Appearance > Customize > Js options.
 
 Extra widgets support
+-------
 You can add home widgets or footer widgets just by adding "home-widget-top", "home-widget-bottom", "footer-widget", "footer-widget-2", 
 "posts-widget-top", "posts-widget-bottom", "page-widget-top", "page-widget-bottom" in the Appearance > Customize > Additional Widgets section. 
 Home-widget-top will be added before the content on the home page, home-widget-bottom will be added after the content on the home page, 
@@ -57,6 +60,7 @@ HTML5 Boilerplate by Nicolas Gallagher, Paul Irish, Mathias Byens, Divya Manian,
 
 
 Some plugins that I highly recommend:
+-------
 
 Wordfence Security - http://www.wordfence.com/
 	Awesome security plugin. There are other great ones, too! So use what is best for your website.
@@ -71,9 +75,10 @@ Flexible Posts Widget - https://wordpress.org/plugins/flexible-posts-widget/
 Post Editor Zen Coding - http://wordpress.org/plugins/post-editor-zen-coding/
 	You can use Zen Coding right in the post editor from the website. So easy to use.
 
-/****************************************/
-				LICENSE
-/***************************************/
+*******************************
+LICENSE
+-------
+
 license: The Unilicense
 License URI: http://unlicense.org/
 
